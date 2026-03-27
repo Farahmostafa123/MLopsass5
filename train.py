@@ -1,17 +1,13 @@
-import mlflow
-import random
 import os
+import random
+accuracy = float(os.getenv("ACCURACY", "0.80"))
 
-mlflow.set_experiment("mlops-assignment")
+# Generate fake run_id
+run_id = "run_" + str(random.randint(1000, 9999))
 
-with mlflow.start_run() as run:
-    accuracy = random.uniform(0.7, 0.95)  # simulate accuracy
-
-    mlflow.log_metric("accuracy", accuracy)
-
-    print(f"Accuracy: {accuracy}")
-    print(f"Run ID: {run.info.run_id}")
-
-    # Save run_id for GitHub Actions
-    with open("model_info.txt", "w") as f:
-        f.write(run.info.run_id)
+print(f"Accuracy: {accuracy}")
+print(f"Run ID: {run_id}")
+with open("model_info.txt", "w") as f:
+    f.write(run_id)
+with open("accuracy.txt", "w") as f:
+    f.write(str(accuracy))
