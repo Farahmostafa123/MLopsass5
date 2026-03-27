@@ -23,7 +23,7 @@ jobs:
 
       - name: Train model
         env:
-          ACCURACY: 0.80 
+          ACCURACY: 0.90 
         run: python train.py
 
       - name: Upload artifact
